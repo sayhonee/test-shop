@@ -1,0 +1,230 @@
+{% extends "shared/_MainLayout.html" %}
+{% load static %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-9">
+                    <div class="blog-post-area">
+                        <h2 class="title text-center">خبـر شمـاره 1</h2>
+                        <div class="single-blog-post">
+                            <h3>خبـر شمـاره 1 - خبـر</h3>
+                            <div class="post-meta">
+                                <ul>
+                                    <li><i class="fa fa-user"></i> کاربـر 1</li>
+                                    <li><i class="fa fa-clock-o"></i> 17:20 ب.ظ</li>
+                                    <li><i class="fa fa-calendar"></i> 28 تیـر 1397</li>
+                                </ul>
+                                <span>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-half-o"></i>
+								</span>
+                            </div>
+                            <a href="">
+                                <img src="{% static "images/blog/blog-one.jpg" %}" alt="">
+                            </a>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ازلورملورم ایپسوم
+                                متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها
+                                و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی
+                                مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت
+                                و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها
+                                شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان
+                                فارسی ایجاد کرد.</p>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ازلورملورم ایپسوم
+                                متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها
+                                و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی
+                                مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت
+                                و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها
+                                شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان
+                                فارسی ایجاد کرد.</p>
+
+                        </div>
+                    </div><!--/blog-post-area-->
+
+                    <div class="rating-area">
+                        <ul class="ratings">
+                            <li class="rate-this">به این مطلب امتیـاز دهیـد :</li>
+                            <li>
+                                <i class="fa fa-star color"></i>
+                                <i class="fa fa-star color"></i>
+                                <i class="fa fa-star color"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </li>
+                            <li class="color">( 6 نظـر )</li>
+                        </ul>
+                        <ul class="tag">
+                            <li>برچسب :</li>
+                            <li><a class="color" href="/products"> محصولات <span>/</span></a></li>
+
+                        </ul>
+                    </div><!--/rating-area-->
+
+                    <div class="socials-share">
+                        <a href=""><img src="{% static "images/blog/socials.png" %}" alt=""></a>
+                    </div><!--/socials-share-->
+
+
+                    <div class="response-area">
+                        <h2>پاسخ ها </h2>
+                        <ul>
+                            {% if not product.comments.all %}
+                                <h1>No comments yet...</h1>
+
+                            {% else %}
+                                {% for comment in product.comments.all %}
+
+                                    <br/><br/>
+                                    <li class="col-sm-12">
+                                        {{ comment.name }} - {{ comment.date }}
+                                    </li>
+
+
+
+                                    {{ comment.body }}
+                                {% endfor %}
+                            {% endif %}
+
+                        </ul>
+                    </div><!--/Response-area-->
+                    <div class="replay-box">
+                        <div class="row">
+                            <form id="main-post-form" class="post-form row" name="post-form"
+                                  method="post"
+                                  action="">
+                                <div class="form-group col-md-6">
+                                    {% csrf_token %}
+                                    {{ post_form.full_name }}
+                                    {% for error in post_form.full_name.errors %}
+                                        <p style="color: red;"> {{ error }}   </p>
+                                    {% endfor %}
+
+                                </div>
+
+                                <div class="form-group col-md-6">
+
+                                    {{ post_form.email }}
+                                    {% for error in post_form.email.errors %}
+                                        <p style="color: red;"> {{ error }}   </p>
+                                    {% endfor %}
+
+                                </div>
+
+
+                                <div class="form-group col-md-12">
+
+                                    {{ post_form.text }}
+                                    {% for error in post_form.text.errors %}
+                                        <p style="color: red;"> {{ error }}   </p>
+                                    {% endfor %}
+
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <input type="submit" name="submit" class="btn btn-primary pull-right"
+                                           value="ارسـال">
+                                </div>
+                            </form>
+                        </div>
+                    </div><!--/Repaly Box-->
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+                        <h2>دسته بندی محصولات</h2>
+                        <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+                                            <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                            دسته 1
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="sportswear" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <ul>
+                                            <li><a href="">محصول 1 </a></li>
+                                            <li><a href="">محصول 2 </a></li>
+                                            <li><a href="">محصول 3 </a></li>
+                                            <li><a href="">محصول 4</a></li>
+                                            <li><a href="">محصول 5</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordian" href="#mens">
+                                            <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                            دسته 2
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="mens" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <ul>
+                                            <li><a href="">محصول 1 </a></li>
+                                            <li><a href="">محصول 2 </a></li>
+                                            <li><a href="">محصول 3 </a></li>
+                                            <li><a href="">محصول 4</a></li>
+                                            <li><a href="">محصول 5</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a href="#">محصول 1</a></h4>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a href="#">محصول 2</a></h4>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a href="#">محصول 3</a></h4>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a href="#">محصول 4</a></h4>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a href="#">محصول 5</a></h4>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a href="#">محصول 6</a></h4>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a href="#">محصول 7</a></h4>
+                                </div>
+                            </div>
+                        </div><!--/category-productsr-->
+
+
+                        <div class="shipping text-center"><!--shipping-->
+                            <img src="images/home/shipping.jpg" alt="">
+                        </div><!--/shipping-->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
